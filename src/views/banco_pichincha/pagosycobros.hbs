@@ -1,0 +1,30 @@
+<div class="col-md-4 mx-auto mt-4">
+  <div class="card text-center">
+    <div class="card-header">
+      <h3>Pagos y cobros - Bco. Pichincha</h3>
+    </div>
+    <div class="card-body">
+      <form action="/pichincha/pagosycobros" method="POST">
+        <div class="form-group">
+            <select class="custom-select" name="title" id="inputGroupSelect02">
+              <option selected>Choose...</option>
+              <option value="CNEL">CNEL</option>
+              <option value="Emapa">Emapa</option>
+              <option value="Bellcorp">Bellcorp</option>
+              <option value="Avon">Avon</option>
+              <option value="Azorti">Azorti</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <textarea name="cantidad" class="form-control" placeholder="Cantidad"></textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" type="submit">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

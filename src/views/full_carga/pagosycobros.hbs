@@ -1,0 +1,29 @@
+<div class="col-md-4 mx-auto mt-4">
+  <div class="card text-center">
+    <div class="card-header">
+      <h3>Pagos y cobros - Full carga</h3>
+    </div>
+    <div class="card-body">
+      <form action="/fullcarga/pagosycobros" method="POST">
+        <div class="form-group">
+            <select class="custom-select" name="title" id="inputGroupSelect02">
+              <option selected>Choose...</option>
+              <option value="CNEL">Cnel</option>
+              <option value="EMAPA">Emapa</option>
+              <option value="BELLCORP">Bellcorp</option>
+              <option value="CLARO">Claro</option>
+              <option value="MOVISTAR">Movistar</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <textarea name="cantidad" class="form-control" placeholder="Cantidad"></textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" type="submit">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
