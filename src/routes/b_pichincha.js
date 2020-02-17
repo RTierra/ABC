@@ -6,6 +6,22 @@ const Transaccion = require('../models/Transacciones');
 const banco = 'Pichincha';
 const entidad = 'Pichincha';
 
+//Tiempo
+var tiempo = new Date();
+
+const dia = tiempo.getDate();
+const mes = tiempo.getMonth();
+const ano = tiempo.getFullYear();
+
+const minuto = tiempo.getMinutes();
+const hora = tiempo.getHours();
+
+const date = dia + '/' + mes + '/' + ano;
+const time = hora + ':' + minuto;
+console.log(date + ' ' + time);
+console.log(tiempo);
+
+
 //Inicio
 
 router.get('/pichincha', (req, res) => {
@@ -35,7 +51,7 @@ router.post('/pichincha/transacciones_bancarias', async (req, res) => {
         cantidad
       });
     } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad});
+      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
       await newTranscacion.save();
       req.flash('success_msg', 'Transaccion registrada');
       res.redirect('/');
@@ -66,7 +82,7 @@ router.post('/pichincha/pagosycobros', async (req, res) => {
         cantidad
       });
     } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad});
+      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
       await newTranscacion.save();
       req.flash('success_msg', 'Transaccion registrada');
       res.redirect('/');

@@ -5,6 +5,19 @@ const router = express.Router();
 const Transaccion = require('../models/Transacciones');
 const entidad = 'Full-carga';
 
+//Tiempo
+var tiempo = new Date();
+
+const dia = tiempo.getDate();
+const mes = tiempo.getMonth();
+const ano = tiempo.getFullYear();
+
+const minuto = tiempo.getMinutes();
+const hora = tiempo.getHours();
+
+const date = dia + '/' + mes + '/' + ano;
+const time = hora + ':' + minuto;
+
 //Inicio
 
 router.get('/fullcarga', (req, res) => {
@@ -34,7 +47,7 @@ router.post('/fullcarga/transacciones_pacifico', async (req, res) => {
         cantidad
       });
     } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad});
+      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
       await newTranscacion.save();
       req.flash('success_msg', 'Transaccion registrada');
       res.redirect('/');
@@ -64,7 +77,7 @@ router.post('/fullcarga/transacciones_produbanco', async (req, res) => {
         cantidad
       });
     } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad});
+      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
       await newTranscacion.save();
       req.flash('success_msg', 'Transaccion registrada');
       res.redirect('/');
@@ -94,7 +107,7 @@ router.post('/fullcarga/pagosycobros', async (req, res) => {
         cantidad
       });
     } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad});
+      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
       await newTranscacion.save();
       req.flash('success_msg', 'Transaccion registrada');
       res.redirect('/');

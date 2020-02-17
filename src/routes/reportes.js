@@ -11,9 +11,9 @@ router.get('/reportes', (req, res) => {
 //Logica deprogramacion; Retiro=aumenta Deposito=disminuye
 //Reportes todos    
 router.get('/reportes/todos', async (req, res) => {
+
     //Transacciones de la base de datos
     const transaccions = await Transaccion.find();
-    
 
     //Transacciones de reduccion de capital en la plataforma (Deposito)
     const  dism = transaccions => transaccions.title !== 'Retiro'
