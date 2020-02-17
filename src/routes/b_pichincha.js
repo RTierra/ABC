@@ -10,7 +10,7 @@ const entidad = 'Pichincha';
 var tiempo = new Date();
 
 const dia = tiempo.getDate();
-const mes = tiempo.getMonth();
+const mes = tiempo.getMonth() + 1;
 const ano = tiempo.getFullYear();
 
 const minuto = tiempo.getMinutes();
