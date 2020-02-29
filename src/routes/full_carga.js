@@ -15,6 +15,9 @@ const ano = tiempo.getFullYear();
 const minuto = tiempo.getMinutes();
 const hora = tiempo.getHours();
 
+const date_d = dia;
+const date_ma = mes + "/" + ano;
+
 const date = dia + '/' + mes + '/' + ano;
 const time = hora + ':' + minuto;
 
@@ -47,42 +50,14 @@ router.post('/fullcarga/transacciones_pacifico', async (req, res) => {
         cantidad
       });
     } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
+      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, date_d, date_ma, time});
       await newTranscacion.save();
       req.flash('success_msg', 'Transaccion registrada');
       res.redirect('/');
     }
   });
 
-// Produbanco
 
-router.get('/fullcarga/transacciones_produbanco', (req, res) => {
-    res.render('full_carga/transacciones_produbanco');
-});
-
-router.post('/fullcarga/transacciones_produbanco', async (req, res) => {
-    const { title, cantidad } = req.body;
-    const banco = 'Produbanco';
-    const errors = [];
-    if (title == 'Choose...') {
-      errors.push({text: 'Escoge una descripcion.'});
-    }
-    if (!cantidad) {
-      errors.push({text: 'Ingresa una cantidad'});
-    }
-    if (errors.length > 0) {
-      res.render('full_carga/transacciones_produbanco', {
-        errors,
-        title,
-        cantidad
-      });
-    } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
-      await newTranscacion.save();
-      req.flash('success_msg', 'Transaccion registrada');
-      res.redirect('/');
-    }
-  });
 
 //Pagos y cobros
 
@@ -107,7 +82,7 @@ router.post('/fullcarga/pagosycobros', async (req, res) => {
         cantidad
       });
     } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
+      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, date_d, date_ma, time});
       await newTranscacion.save();
       req.flash('success_msg', 'Transaccion registrada');
       res.redirect('/');

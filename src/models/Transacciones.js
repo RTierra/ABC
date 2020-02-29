@@ -24,6 +24,14 @@ const TransaccionSchema = new Schema({
     type: String,
     required: true
   },
+  date_d: {
+    type: String,
+    required: true
+  },
+  date_ma: {
+    type: String,
+    required: true
+  },
   time: {
     type: String,
     required: true

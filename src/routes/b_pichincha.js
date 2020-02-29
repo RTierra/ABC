@@ -16,6 +16,9 @@ const ano = tiempo.getFullYear();
 const minuto = tiempo.getMinutes();
 const hora = tiempo.getHours();
 
+const date_d = dia;
+const date_ma = mes + "/" + ano;
+
 const date = dia + '/' + mes + '/' + ano;
 const time = hora + ':' + minuto;
 console.log(date + ' ' + time);
@@ -51,7 +54,7 @@ router.post('/pichincha/transacciones_bancarias', async (req, res) => {
         cantidad
       });
     } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
+      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, date_d, date_ma, time});
       await newTranscacion.save();
       req.flash('success_msg', 'Transaccion registrada');
       res.redirect('/');
@@ -82,7 +85,7 @@ router.post('/pichincha/pagosycobros', async (req, res) => {
         cantidad
       });
     } else {
-      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, time});
+      const newTranscacion = new Transaccion({title, cantidad, banco, entidad, date, date_d, date_ma, time});
       await newTranscacion.save();
       req.flash('success_msg', 'Transaccion registrada');
       res.redirect('/');
