@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # L & P - A.B.C.
 
 ------------
@@ -60,6 +59,3 @@
 <script> node ./src/index.js </script>
 ```
 =======
-<h1>Codigo de B Y P ABC</h1>
-<h2> Tecnologias utilizadas </h2>
->>>>>>> ca5b7cde57b269e6b885972c0731ff525ce50a2a
