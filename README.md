@@ -58,4 +58,3 @@
 <!-- Funcionamiento -->
 <script> node ./src/index.js </script>
 ```
-=======
