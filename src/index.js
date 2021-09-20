@@ -8,10 +8,10 @@ const passport = require('passport');
 const morgan = require('morgan');
 const { format } = require('timeago.js');
 
-
 // Initializations
 const app = express();
 require('./database');
+
 
 
 // settings
@@ -21,7 +21,10 @@ app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   layoutsDir: path.join(app.get('views'), 'layouts'),
   partialsDir: path.join(app.get('views'), 'partials'),
-  extname: '.hbs'
+  extname: '.hbs',
+  
+
+ 
 }));
 app.set('view engine', '.hbs');
 
@@ -55,8 +58,12 @@ app.use((req, res, next) => {
 // routes
 app.use(require('./routes'));
 app.use(require('./routes/b_pichincha.js'));
+app.use(require('./routes/b_guayaquil.js'));
 app.use(require('./routes/full_carga.js'));
-app.use(require('./routes/reportes.js'))
+app.use(require('./routes/reportes.js'));
+app.use(require('./routes/prueba.js'));
+app.use(require('./routes/papeleria.js'));
+
 
 
 // static files

@@ -3,18 +3,19 @@ const router = express.Router();
 
 //Models
 const Transaccion = require('../models/Transacciones');
-const entidad = 'Full-carga';
+const banco = 'Guayaquil';
+const entidad = 'Guayaquil';
 
 
-// Pacifico
 
-router.get('/fullcarga/transacciones_pacifico', (req, res) => {
-    res.render('full_carga/transacciones_pacifico');
+//Transacciones
+
+router.get('/guayaquil/transacciones_guayaquil', (req, res) => {
+    res.render('banco_guayaquil/transacciones_b');
 });
 
-router.post('/fullcarga/transacciones_pacifico', async (req, res) => {
+router.post('/guayaquil/transacciones_guayaquil', async (req, res) => {
     const { title, cantidad } = req.body;
-    const banco = 'Pacifico';
     const descripcion = "transaccion";
 
     //Tiempo
@@ -41,7 +42,7 @@ router.post('/fullcarga/transacciones_pacifico', async (req, res) => {
       errors.push({text: 'Ingresa una cantidad'});
     }
     if (errors.length > 0) {
-      res.render('full_carga/transacciones_pacifico', {
+      res.render('banco_guayaquil/transacciones_b', {
         errors,
         title,
         cantidad
@@ -54,19 +55,18 @@ router.post('/fullcarga/transacciones_pacifico', async (req, res) => {
     }
   });
 
-
-
 //Pagos y cobros
 
-router.get('/fullcarga/pagosycobros', (req, res) => {
-    res.render('full_carga/pagosycobros');
+router.get('/guayaquil/pagosycobros', (req, res) => {
+    res.render('banco_guayaquil/pagosycobros');
 });
 
-router.post('/fullcarga/pagosycobros', async (req, res) => {
-    const { descripcion, cantidad } = req.body;
-    const banco = 'Full-carga';
-    const title = "Pagos y cobros";
 
+router.post('/guayaquil/pagosycobros', async (req, res) => {
+    const {  descripcion, cantidad } = req.body;
+    const title = "Pagos y cobros";
+    const errors = [];
+    
     //Tiempo
     var tiempo = new Date();
 
@@ -83,15 +83,14 @@ router.post('/fullcarga/pagosycobros', async (req, res) => {
     const date = dia + '/' + mes + '/' + ano;
     const time = hora + ':' + minuto;
 
-    const errors = [];
     if (!descripcion) {
       errors.push({text: 'Ingresa una descripcion.'});
     }
     if (!cantidad) {
-      errors.push({text: 'Ingresa una cantidad'});
+      errors.push({text: 'Ingresa tu descripción'});
     }
     if (errors.length > 0) {
-      res.render('full_carga/pagosycobros', {
+      res.render('banco_guayaquil/pagosycobros', {
         errors,
         descripcion,
         cantidad
