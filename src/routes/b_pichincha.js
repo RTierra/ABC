@@ -35,7 +35,7 @@ router.post('/pichincha/transacciones_bancarias', async (req, res) => {
 
 
     const errors = [];
-    if (title == 'Choose...') {
+    if (title == 'Selecciona una opcion') {
       errors.push({text: 'Escoge una descripcion.'});
     }
     if (!cantidad) {

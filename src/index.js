@@ -65,11 +65,11 @@ app.use(require('./routes/prueba.js'));
 app.use(require('./routes/papeleria.js'));
 
 
-
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Server is listening
 app.listen(app.get('port'), () => {
   console.log('Server on port', app.get('port'));
+  
 });
