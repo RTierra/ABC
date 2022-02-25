@@ -2,23 +2,90 @@ const express = require('express');
 const router = express.Router();
 //Models
 const Productos = require('../models/Productos');
+const Ventas = require('../models/Ventas')
 
 
-//Transacciones
+//VENTAS
 
-router.get('/papeleria', (req, res) => {
-    res.render('papeleria/productos');
+router.get('/ventas', async (req, res) => {
+//DATOS generales
+  //Productos de la base de datos
+  const productos = await Productos.find().lean();
+  //Ventas de la base de datos
+  const ventas = await Ventas.find().lean();
+  //Ultimas 5 ventas para mostrar
+  var ultimas = ventas.slice(-4);
+
+    res.render('papeleria/ventas', { productos, ultimas });
 });
 
+router.post('/borr/ventas', async (req, res) => {
+  const { title } = req.body;
+  await Ventas.findByIdAndDelete(title);
+  req.flash('success_msg', 'Venta eliminada');
+  res.redirect('/ventas')
+});
+
+router.post('/ventas', async (req, res) => {
+  const { title, cantidad } = req.body;
+  const vendedor = "Susana, Yari";
+
+  //Tiempo
+  var tiempo = new Date();
+
+  const dia = tiempo.getDate();
+  const mes = tiempo.getMonth() + 1;
+  const ano = tiempo.getFullYear();
+
+  const minuto = tiempo.getMinutes();
+  const hora = tiempo.getHours();
+
+  const date_d = dia;
+  const date_ma = mes + "/" + ano;
+
+  const date = dia + '/' + mes + '/' + ano;
+  const time = hora + ':' + minuto;
+  
+   //NUEVA CANTIDAD RESTADA DE CANTIDAD DE PRODUCTOOS
+   const productos = await Productos.find({nombre: title}).lean();
+   const nuevacantidad = cantidad;
+   const cantidadproductos = JSON.stringify(productos.cantidad);//transformas la cantidad a numero
+   console.log(nuevacantidad);
+   console.log(cantidadproductos);
+   console.log(title);
+ 
+  const errors = [];
+  if (title == 'Selecciona una opcion') {
+    errors.push({text: 'Escoge una descripcion.'});
+  }
+  if (!cantidad) {
+    errors.push({text: 'Ingresa una cantidad'});
+  }
+  //CORREGUIR LA CINCATENACION DE LAS ULTIAS TRANSACCIONES
+  if (errors.length > 0) {
+    res.render('papeleria/ventas', {
+      errors,
+      title,
+      cantidad
+    });
+  } else {
+    const newVentas = new Ventas({title, cantidad, vendedor,  date, date_d, date_ma, time});
+    await newVentas.save();
+    req.flash('success_msg', 'Venta registrada');
+    res.redirect('/ventas');
+  }
+});
+
+
+
+//INVENTARIO
 
 router.get('/inventario', async (req, res) => {
     //DATOS generales
     //Transacciones de la base de datos
     const productos = await Productos.find().lean();
-    //Ultimas 5 transaccciones para mostrar
-    var ultimas = productos.slice(-4);
-
-    res.render('papeleria/inventario', { ultimas });
+                                                            
+    res.render('papeleria/inventario', { productos });
 });
 
 router.post('/borr/inventario', async (req, res) => {
@@ -29,7 +96,7 @@ router.post('/borr/inventario', async (req, res) => {
   });
 
 router.post('/inventario', async (req, res) => {
-    const { nombre, tipo, marca, precio } = req.body;
+    const { nombre, tipo, marca, precio, cantidad } = req.body;
 
     //Tiempo
     var tiempo = new Date();
@@ -61,17 +128,21 @@ router.post('/inventario', async (req, res) => {
     if (!precio) {
       errors.push({text: 'Ingresa un precio'});
     }
+    if (!cantidad) {
+      errors.push({text: 'Ingresa la cantidad'});
+    }
     if (errors.length > 0) {
       res.render('papeleria/inventario', {
         errors,
         nombre,
         tipo,
         marca,
-        precio
+        precio,
+        cantidad
       });
     } else {
-      const newTranscacion = new Productos({nombre, tipo, marca, precio, date, date_d, date_ma, time});
-      await newTranscacion.save();
+      const newProducto = new Productos({nombre, tipo, marca, precio, cantidad, date, date_d, date_ma, time});
+      await newProducto.save();
       req.flash('success_msg', 'Producto agregado');
       res.redirect('/inventario');
     }

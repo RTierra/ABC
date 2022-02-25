@@ -20,6 +20,10 @@ const ProductosSchema = new Schema({
         type: Number,
         required: true
     },
+    cantidad: {
+        type: Number,
+        required: true
+    },
     date: {
         type: String,
         required: true

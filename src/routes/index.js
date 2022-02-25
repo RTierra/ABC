@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 //DATOS generales
   //Transacciones de la base de datos
   const transaccions = await Transaccion.find().lean();
-
+                                                                         //INTEGRAR EL FILTRO EN FIND PARA MEJORAR LA VELOCIDAD
   //Ultimas 5 transaccciones para mostrar
   var ultimas = transaccions.slice(-4);
   

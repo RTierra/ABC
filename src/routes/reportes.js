@@ -31,7 +31,7 @@ router.get('/reportes/todos', async (req, res) => {
 
     //Transacciones de la base de datos
     const transaccions = await Transaccion.find({date:date}).lean();
-
+    
     //Transacciones de reduccion de capital en la plataforma (Deposito)
     const  dism = transaccions => transaccions.title !== 'Retiro'
     var disminuye = transaccions.filter(dism);
@@ -45,7 +45,7 @@ router.get('/reportes/todos', async (req, res) => {
     for (var i=0; i<disminuye.length; i++){
       acumdism = acumdism + disminuye[i].cantidad;
     };
-  
+    
     //Suma total de aumento
     var acumaume = 0;
     for (var i=0; i<aumenta.length; i++){
