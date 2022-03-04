@@ -1,7 +1,7 @@
 # L & P - A.B.C.
 
 ------------
-[TOC]
+![](src/public/img/Imagen3.png)
 
 ------------
 
